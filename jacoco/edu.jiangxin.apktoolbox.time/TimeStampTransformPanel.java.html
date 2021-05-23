@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TimeStampTransformPanel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">APKToolBoxGUI</a> &gt; <a href="index.source.html" class="el_package">edu.jiangxin.apktoolbox.time</a> &gt; <span class="el_source">TimeStampTransformPanel.java</span></div><h1>TimeStampTransformPanel.java</h1><pre class="source lang-java linenums">package edu.jiangxin.apktoolbox.time;
+
+import edu.jiangxin.apktoolbox.swing.extend.EasyPanel;
+import edu.jiangxin.apktoolbox.utils.Utils;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class TimeStampTransformPanel extends EasyPanel {
+
+<span class="nc" id="L13">    public TimeStampTransformPanel() throws HeadlessException {</span>
+<span class="nc" id="L14">        placeComponents();</span>
+<span class="nc" id="L15">        Utils.setJComponentSize(this, 700, 350);</span>
+<span class="nc" id="L16">    }</span>
+
+    private void placeComponents() {
+<span class="nc" id="L19">        setLayout(null);</span>
+
+        // 创建JLabel
+<span class="nc" id="L22">        JLabel timestampLabel = new JLabel(&quot;时间戳：&quot;);</span>
+<span class="nc" id="L23">        timestampLabel.setBounds(10, 20, 80, 25);</span>
+<span class="nc" id="L24">        add(timestampLabel);</span>
+
+        // 创建文本域用于用户输入
+<span class="nc" id="L27">        JTextField userText = new JTextField(20);</span>
+<span class="nc" id="L28">        userText.setBounds(100,20,165,25);</span>
+<span class="nc" id="L29">        add(userText);</span>
+
+        // 下拉选择秒/毫秒
+<span class="nc" id="L32">        JComboBox&lt;Object&gt; cmb = new JComboBox&lt;&gt;();</span>
+<span class="nc" id="L33">        cmb.addItem(&quot;秒(s)&quot;);</span>
+<span class="nc" id="L34">        cmb.addItem(&quot;毫秒(ms)&quot;);</span>
+<span class="nc" id="L35">        cmb.setBounds(300, 20, 80, 25);</span>
+<span class="nc" id="L36">        add(cmb);</span>
+
+        // 创建转换button
+<span class="nc" id="L39">        JButton firstTransformToTimestampButton = new JButton();</span>
+<span class="nc" id="L40">        firstTransformToTimestampButton.setText(&quot;转换&quot;);</span>
+<span class="nc" id="L41">        firstTransformToTimestampButton.setBounds(400, 20, 60, 25);</span>
+<span class="nc" id="L42">        add(firstTransformToTimestampButton);</span>
+
+        // 输出的时间文本域，不可写
+<span class="nc" id="L45">        JTextField outputText = new JTextField(20);</span>
+<span class="nc" id="L46">        outputText.setBounds(500,20,165,25);</span>
+<span class="nc" id="L47">        add(outputText);</span>
+
+<span class="nc" id="L49">        firstTransformToTimestampButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L52">                String timestamp = userText.getText();</span>
+<span class="nc" id="L53">                Integer index = cmb.getSelectedIndex();</span>
+<span class="nc" id="L54">                String result = &quot;&quot;;</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">                if (index.equals(0)) {</span>
+<span class="nc" id="L56">                    result = DateTransform.timestampToString(timestamp);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">                }else if (index.equals(1)) {</span>
+<span class="nc" id="L58">                    result = DateTransform.milTimestampToString(timestamp);</span>
+                }
+<span class="nc" id="L60">                outputText.setText(result);</span>
+<span class="nc" id="L61">            }</span>
+        });
+
+        // 创建JLabel
+<span class="nc" id="L65">        JLabel stringTime = new JLabel(&quot;时间：&quot;);</span>
+<span class="nc" id="L66">        stringTime.setBounds(30, 100, 80, 25);</span>
+<span class="nc" id="L67">        add(stringTime);</span>
+
+        // 创建文本域用于用户输入
+<span class="nc" id="L70">        JTextField secondUserText = new JTextField(20);</span>
+<span class="nc" id="L71">        secondUserText.setBounds(120,100,165,25);</span>
+<span class="nc" id="L72">        add(secondUserText);</span>
+
+        // 创建转换button
+<span class="nc" id="L75">        JButton transformToTimestampButton = new JButton();</span>
+<span class="nc" id="L76">        transformToTimestampButton.setText(&quot;转换&quot;);</span>
+<span class="nc" id="L77">        transformToTimestampButton.setBounds(300, 100, 60, 25);</span>
+<span class="nc" id="L78">        add(transformToTimestampButton);</span>
+
+        // 输出的时间文本域，不可写
+<span class="nc" id="L81">        JTextField secondOutputText = new JTextField(20);</span>
+<span class="nc" id="L82">        secondOutputText.setBounds(400,100,165,25);</span>
+<span class="nc" id="L83">        add(secondOutputText);</span>
+
+        // 下拉选择秒/毫秒
+<span class="nc" id="L86">        JComboBox&lt;Object&gt; secondCmb = new JComboBox&lt;Object&gt;();</span>
+<span class="nc" id="L87">        secondCmb.addItem(&quot;秒(s)&quot;);</span>
+<span class="nc" id="L88">        secondCmb.addItem(&quot;毫秒(ms)&quot;);</span>
+<span class="nc" id="L89">        secondCmb.setBounds(600, 100, 80, 25);</span>
+<span class="nc" id="L90">        add(secondCmb);</span>
+
+<span class="nc" id="L92">        transformToTimestampButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L95">                String string = secondUserText.getText();</span>
+<span class="nc" id="L96">                Integer index = secondCmb.getSelectedIndex();</span>
+<span class="nc" id="L97">                String result = &quot;&quot;;</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                if (index.equals(0)) {</span>
+<span class="nc" id="L99">                    result = DateTransform.stringToTimestamp(string);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">                }else if (index.equals(1)) {</span>
+<span class="nc" id="L101">                    result = DateTransform.stringToMilTimestamp(string);</span>
+                }
+<span class="nc" id="L103">                secondOutputText.setText(result);</span>
+<span class="nc" id="L104">            }</span>
+        });
+
+<span class="nc" id="L107">        JLabel currentTimestampTitleJlabel = new JLabel(&quot;当前时间戳：&quot;);</span>
+<span class="nc" id="L108">        currentTimestampTitleJlabel.setBounds(30, 200, 150, 50);</span>
+<span class="nc" id="L109">        currentTimestampTitleJlabel.setFont(new Font(&quot;Serif&quot;, Font.BOLD, 22));</span>
+<span class="nc" id="L110">        add(currentTimestampTitleJlabel);</span>
+
+<span class="nc" id="L112">        JLabel currentTimestampContentJlabel = new JLabel();</span>
+<span class="nc" id="L113">        currentTimestampContentJlabel.setBounds(200, 200, 150, 50);</span>
+<span class="nc" id="L114">        currentTimestampContentJlabel.setFont(new Font(&quot;Serif&quot;, Font.BOLD, 22));</span>
+<span class="nc" id="L115">        add(currentTimestampContentJlabel);</span>
+
+<span class="nc" id="L117">        JLabel currentTimeTitleJlabel = new JLabel(&quot;当前时间：&quot;);</span>
+<span class="nc" id="L118">        currentTimeTitleJlabel.setBounds(30, 240, 150, 50);</span>
+<span class="nc" id="L119">        currentTimeTitleJlabel.setFont(new Font(&quot;Serif&quot;, Font.BOLD, 22));</span>
+<span class="nc" id="L120">        add(currentTimeTitleJlabel);</span>
+
+<span class="nc" id="L122">        JLabel currentTimeContentJlabel = new JLabel();</span>
+<span class="nc" id="L123">        currentTimeContentJlabel.setBounds(200, 240, 300, 50);</span>
+<span class="nc" id="L124">        currentTimeContentJlabel.setFont(new Font(&quot;Serif&quot;, Font.BOLD, 22));</span>
+<span class="nc" id="L125">        add(currentTimeContentJlabel);</span>
+
+
+<span class="nc" id="L128">        new Thread(new Runnable() {</span>
+            @Override
+            public void run() {
+                while (true) {
+<span class="nc" id="L132">                    long currentTimeStamp = System.currentTimeMillis() / 1000;</span>
+<span class="nc" id="L133">                    currentTimestampContentJlabel.setText(String.valueOf(currentTimeStamp));</span>
+<span class="nc" id="L134">                    currentTimeContentJlabel.setText(DateTransform.timestampToString(String.valueOf(currentTimeStamp)));</span>
+                    try {
+<span class="nc" id="L136">                        Thread.sleep(1000);</span>
+<span class="nc" id="L137">                    } catch (InterruptedException e) {</span>
+<span class="nc" id="L138">                        e.printStackTrace();</span>
+<span class="nc" id="L139">                    }</span>
+<span class="nc" id="L140">                }</span>
+
+            }
+<span class="nc" id="L143">        }).start();</span>
+<span class="nc" id="L144">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

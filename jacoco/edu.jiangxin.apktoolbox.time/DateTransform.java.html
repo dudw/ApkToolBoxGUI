@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateTransform.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">APKToolBoxGUI</a> &gt; <a href="index.source.html" class="el_package">edu.jiangxin.apktoolbox.time</a> &gt; <span class="el_source">DateTransform.java</span></div><h1>DateTransform.java</h1><pre class="source lang-java linenums">package edu.jiangxin.apktoolbox.time;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+<span class="nc" id="L7">public class DateTransform {</span>
+    /**
+     * 秒级时间戳转换为字符串格式
+     * @param timestamp 时间戳：1588766006
+     * @return 2020-05-06 19:53:26
+     */
+    public static String timestampToString(String timestamp) {
+<span class="nc bnc" id="L14" title="All 6 branches missed.">        if (timestamp == null || timestamp.equals(&quot;null&quot;) || timestamp.isEmpty()) {</span>
+<span class="nc" id="L15">            return &quot;&quot;;</span>
+        }
+
+<span class="nc" id="L18">        String format = &quot;yyyy-MM-dd HH:mm:ss&quot;;</span>
+
+<span class="nc" id="L20">        SimpleDateFormat sdf = new SimpleDateFormat(format);</span>
+        try{
+<span class="nc" id="L22">            return sdf.format(new Date(new Long(timestamp + &quot;000&quot;)));</span>
+<span class="nc" id="L23">        }catch (Exception e) {</span>
+<span class="nc" id="L24">            return &quot;&quot;;</span>
+        }
+    }
+
+    /**
+     * 毫秒级时间戳转换成字符串格式
+     * @param timestamp 毫秒级时间戳（13位）
+     * @return 时间字符串
+     */
+    public static String milTimestampToString(String timestamp) {
+<span class="nc bnc" id="L34" title="All 6 branches missed.">        if (timestamp == null || timestamp.equals(&quot;null&quot;) || timestamp.isEmpty()) {</span>
+<span class="nc" id="L35">            return &quot;&quot;;</span>
+        }
+
+<span class="nc" id="L38">        String format = &quot;yyyy-MM-dd HH:mm:ss&quot;;</span>
+
+<span class="nc" id="L40">        SimpleDateFormat sdf = new SimpleDateFormat(format);</span>
+        try {
+<span class="nc" id="L42">            return sdf.format(new Date(new Long(timestamp)));</span>
+<span class="nc" id="L43">        }catch (Exception e) {</span>
+<span class="nc" id="L44">            return &quot;&quot;;</span>
+        }
+
+    }
+
+    /**
+     * 日期的字符串格式转换成时间戳
+     * @param string 2020-05-06 19:53:26
+     * @return 秒级时间戳
+     */
+    public static String stringToTimestamp(String string) {
+        try {
+<span class="nc" id="L56">            SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="nc" id="L57">            return String.valueOf(sdf.parse(string).getTime() / 1000);</span>
+<span class="nc" id="L58">        } catch (ParseException e) {</span>
+<span class="nc" id="L59">            return &quot;&quot;;</span>
+        }
+    }
+
+    /**
+     * 转换成毫秒级时间戳
+     * @param string 日期的字符串表示
+     * @return 毫秒级时间戳
+     */
+    public static String stringToMilTimestamp(String string) {
+        try {
+<span class="nc" id="L70">            SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="nc" id="L71">            return String.valueOf(sdf.parse(string).getTime());</span>
+<span class="nc" id="L72">        } catch (ParseException e) {</span>
+<span class="nc" id="L73">            return &quot;&quot;;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
