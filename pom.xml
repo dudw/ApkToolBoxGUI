@@ -8,13 +8,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <repositories>
-        <!-- cpdetector:cpdetector -->
-        <repository>
-            <id>EBI Repository</id>
-            <url>https://www.ebi.ac.uk/intact/maven/nexus/content/repositories/public/</url>
-        </repository>
-    </repositories>
     <dependencies>
         <dependency>
             <groupId>commons-io</groupId>
@@ -60,6 +53,15 @@
             <groupId>cpdetector</groupId>
             <artifactId>cpdetector</artifactId>
             <version>1.0.7</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/cpdetector-1.0.7.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.mozilla.intl</groupId>
+            <artifactId>chardet</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/chardet-1.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.googlecode.juniversalchardet</groupId>
