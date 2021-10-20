@@ -21,11 +21,6 @@ before_install:
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 addons:
-  # For Sonar Cloud
-  sonarcloud:
-    organization: "$SONAR_ORG"
-    token:
-      secure: "$SONAR_TOKEN"
   # For Coverity
   coverity_scan:
     project:
@@ -38,11 +33,7 @@ addons:
 
 script:
    - mvn install
-  # For Sonar Cloud
-#   - mvn clean package sonar:sonar
 
 after_success:
-   # For Coveralls
-   - mvn clean test jacoco:report coveralls:report
    # For Code Climate
    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
